@@ -7,14 +7,20 @@ opponents = 24  # Number of opponents
 move_pairs = 30  # Number of pair-moves (60 moves total)
 
 async def game(game_number):
+    start_time = time.perf_counter()
     for move in range(1, move_pairs + 1):
         # Judit's move
-        print(f"Game {game_number}, Move {move * 2 - 1}: Judit")
+        print(f"Board {game_number}, Move {move * 2 - 1}: Judit")
         time.sleep(judit_move_time)
         
         # Opponent's move
-        print(f"Game {game_number}, Move {move * 2}: Opponent")
+        print(f"Board {game_number}, Move {move * 2}: Opponent")
         await asyncio.sleep(opponent_move_time)
+    
+    end_time = time.perf_counter()
+    total_time = round(end_time - start_time, 2)
+    print(f"Board {game_number} finished in {total_time} secs.")
+    return total_time
 
 async def async_io():
     start_time = time.perf_counter()
