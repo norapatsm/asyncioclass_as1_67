@@ -1,31 +1,30 @@
 import asyncio
 import time
 
-async def judit_move():
-    await asyncio.sleep(0.05) # Judit takes 5 seconds per move
+judit_move_time = 0.1  # Judit's move time in seconds
+opponent_move_time = 0.5  # Opponent's move time in seconds
+opponents = 24  # Number of opponents
+move_pairs = 30  # Number of pair-moves (60 moves total)
 
-async def opponent_move():
-    await asyncio.sleep(0.55) # Opponent takes 55 seconds per move
+async def game(game_number):
+    for move in range(1, move_pairs + 1):
+        # Judit's move
+        print(f"Game {game_number}, Move {move * 2 - 1}: Judit")
+        time.sleep(judit_move_time)
+        
+        # Opponent's move
+        print(f"Game {game_number}, Move {move * 2}: Opponent")
+        await asyncio.sleep(opponent_move_time)
 
-async def play_game(game_id):
-    num_moves = 30
-    for move in range(num_moves):
-        await judit_move()
-        await opponent_move()
-    print(f"Game {game_id} finished")
+async def async_io():
+    start_time = time.perf_counter()
 
-async def asynchronous_chess_exhibition_with_asyncio():
-    num_opponents = 24
-    tasks = []
-    
-    for i in range(1, num_opponents + 1):
-        tasks.append(play_game(i))
-    
+    # Create a task for each game
+    tasks = [game(i) for i in range(1, opponents + 1)]
     await asyncio.gather(*tasks)
 
-# เรียกใช้ฟังก์ชัน
-start_time = time.time()
-asyncio.run(asynchronous_chess_exhibition_with_asyncio())
-end_time = time.time()
+    total_time = round(time.perf_counter() - start_time, 2)
+    print(f"Board exhibition finished in {total_time} secs.")
 
-print(f"Total time for the entire exhibition: {(end_time - start_time) / 3600} hours")
+if __name__ == "__main__":
+    asyncio.run(async_io())

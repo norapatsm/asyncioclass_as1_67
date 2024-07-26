@@ -1,16 +1,33 @@
 import time
 
-def synchronous_chess_exhibition():
-    num_opponents = 24
-    judit_move_time = 5 # seconds
-    opponent_move_time = 55 # seconds
-    num_moves = 30 # pair-moves (60 moves total)
-    
-    total_time_per_game = (judit_move_time + opponent_move_time) * num_moves
-    total_time_exhibition = total_time_per_game * num_opponents
-    
-    print(f"Total time for each game: {total_time_per_game / 60} minutes")
-    print(f"Total time for the entire exhibition: {total_time_exhibition / 3600} hours")
+my_computer_time = 0.1  # Judit's move time in seconds
+opponent_computer_time = 0.5  # Opponent's move time in seconds
+move_pairs = 30  # Number of pair-moves (60 moves total)
 
-# เรียกใช้ฟังก์ชัน
-synchronous_chess_exhibition()
+def game():
+    total_time = 0
+    for move in range(1, move_pairs + 1):
+        # Judit's move
+        start_move_time = time.perf_counter()
+        print(f"Move {move * 2 - 1}: Judit")
+        time.sleep(my_computer_time)
+        total_time += (time.perf_counter() - start_move_time)
+        
+        # Opponent's move
+        start_move_time = time.perf_counter()
+        print(f"Move {move * 2}: Opponent")
+        time.sleep(opponent_computer_time)
+        total_time += (time.perf_counter() - start_move_time)
+    
+    return total_time
+
+if __name__ == "__main__":
+    start_time = time.perf_counter()
+    
+    # Simulate one game
+    game_time = game()
+    
+    total_game_time = game_time
+    
+    print(f"One game finished in {total_game_time:.2f} secs.")
+    print(f"Estimated total time for all games: {total_game_time * 24:.2f} secs.")

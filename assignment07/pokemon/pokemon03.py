@@ -17,6 +17,6 @@ async def main():
     
     # open a new file to wirte the list of moves into.
     async with aiofiles.open(f'{pokemonmove_directory}/{name}_move.txt', mode='w') as f :
-        await f.write('/n'.join(moves)) 
+        await f.write('\n'.join(moves)) 
 
 asyncio.run(main())
