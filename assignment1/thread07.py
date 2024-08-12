@@ -14,5 +14,5 @@ if __name__ == "__main__":
     format = "%(asctime)s: %(message)s"
     logging.basicConfig(format=format, level=logging.INFO, datefmt="%H:%M:%S")
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:#สร้าง ThreadPoolExecutor กำหนดจำนวนสูงสุดThreads ที่ทำงานพร้อมกัน
         executor.map(thread_function, range(3))
