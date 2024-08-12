@@ -27,3 +27,7 @@ if __name__ == "__main__":
         for index in range(2):
             executor.submit(database.update, index)
     logging.info("Testing update. Ending value is %d." , database.value)
+
+# โปรแกรมนี้จำลองการทำงานของหลาย Threads ที่อัปเดตค่าใน FakeDatabase โดยไม่มีการควบคุมการเข้าถึงข้อมูลอย่างเหมาะสม
+# แสดงถึงปัญหา race condition ซึ่งค่าที่ได้จากการทำงานของ Threads อาจไม่เป็นไปตามที่คาดหวัง
+# logging จะบันทึกขั้นตอนของการทำงานของแต่ละ Thread เพื่อแสดงผลลัพธ์และเวลาในการทำงาน
