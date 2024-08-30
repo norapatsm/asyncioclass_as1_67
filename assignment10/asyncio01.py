@@ -29,7 +29,7 @@ async def consumer(queue):
         if item is None:
             break
         # report
-        print(f'\t> Consumer: Done')
+        print(f'\t> Consumer got {item}')
     # all done
     print('Consumer: Done')
 
