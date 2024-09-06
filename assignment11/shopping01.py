@@ -85,9 +85,6 @@ async def main():
 
 
     
-if __name__ == "__main__":
-    asyncio.run(main())
-
 
 # +--------|------------|-------------|-----------------------|-------------------------    
 # Queue	   | Customer   | Cashier	  |  Time each Customer	  |  Time for all Customers
