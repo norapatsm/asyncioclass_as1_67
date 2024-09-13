@@ -39,7 +39,6 @@ async def checkout_customer(queue: Queue, cashier_number: int):
             await asyncio.sleep(product.checkout_time)
 
         print(f"The Cashier_{cashier_number} finished checkout Customer_{customer.customer_id} in {round(time.perf_counter() - customer_start_time, ndigits=2)} secs")
-
         queue.task_done()
 
 # we implement the generate_customer method as a factory method for producing customers.
